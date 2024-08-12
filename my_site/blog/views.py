@@ -9,7 +9,7 @@ def index(request):
 
 
 def blog_page(request):
-    pass
+    return render(request, 'blog/all-post.html')
 
 
 def blog_detail_page(request):

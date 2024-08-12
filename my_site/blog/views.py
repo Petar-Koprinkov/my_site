@@ -12,5 +12,5 @@ def blog_page(request):
     return render(request, 'blog/all-post.html')
 
 
-def blog_detail_page(request):
-    pass
+def blog_detail_page(request, slug):
+    return render(request, 'blog/post-details.html')

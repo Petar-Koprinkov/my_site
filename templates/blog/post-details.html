@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block title %}Title{% endblock %}
+
+{% block style_css %}
+    <link rel="stylesheet" href="{% static 'blog/post-details.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <section id="summary">
+        <h2>
+            Post title
+        </h2>
+        <article>
+            <img src="{% static 'blog/images/mountains.jpg' %}" alt="Post title">
+            <address>
+                By Petar
+            </address>
+            <div>
+                Last updated on <time>July 10th</time>
+            </div>
+        </article>
+    </section>
+    
+    <main>
+        <p>
+            dfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgre
+            sgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersge
+        </p>
+        <p>
+            dfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgre
+            sgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersge
+        </p>
+        <p>dfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersgedfsgdsgre
+            sgresgersgedfsgdsgresgresgersgedfsgdsgresgresgersge
+        </p>
+    </main>
+{% endblock %}

@@ -5,5 +5,4 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('blog/', views.blog_page, name='blog_page'),
     path('blog/<slug:slug>/', views.blog_detail_page, name='blog_detail_page'),
-    path('my-blog/', views.blog_page, name='my_blog_page'),
 ]

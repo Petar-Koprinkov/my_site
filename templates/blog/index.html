@@ -11,10 +11,10 @@
 
     <section id="welcome">
         <header>
-            <img src="{% static 'blog/images/BM.jpg' %}" alt="Petar - The author of thi blog">
-            <h2>Petar's Blog</h2>
+            <img src="{% static 'blog/images/BM.jpg' %}" alt="{{ author.first_name }} {{ author.last_name }}">
+            <h2>{{ author.first_name }}'s Blog</h2>
         </header>
-        <p>Hello, My name is Petar Koprinkov I love to blog about tech and the world!</p>
+        <p>Hello, My name is {{ author.first_name }} {{ author.last_name }} I love to blog about tech and the world!</p>
     </section>
     
     <section id="latest-posts">

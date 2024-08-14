@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -19,7 +20,7 @@ class Author(models.Model):
 
 class Post(models.Model):
     title = models.CharField(
-        max_length=50
+        max_length=75
     )
     excerpt = models.TextField()
 
@@ -35,13 +36,18 @@ class Post(models.Model):
         unique=True,
     )
 
-    content = models.TextField()
+    content = models.TextField(
+        validators=[MinLengthValidator(10)]
+    )
 
     author = models.ForeignKey(
         to=Author,
         on_delete=models.CASCADE,
         related_name='posts'
     )
+
+    def __str__(self):
+        return f'{self.title}'
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

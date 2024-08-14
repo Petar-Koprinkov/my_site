@@ -15,7 +15,7 @@ def index(request):
 
 
 def blog_page(request):
-    posts = Post.objects.select_related("author")
+    posts = Post.objects.select_related("author").order_by("-date")
     context = {
         "posts": posts,
     }

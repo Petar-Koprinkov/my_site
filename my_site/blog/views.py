@@ -26,13 +26,24 @@ class BlogPageView(ListView):
 
 
 class BlogDetailPageView(View):
+
+    def is_post_stored(self, request, post_id):
+        stored_post = request.session.get('stored_post')
+        if stored_post is not None:
+            is_saved = post_id in stored_post
+        else:
+            is_saved = False
+        return is_saved
+
     def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         form = CommentsForm()
+
         context = {
             'form': form,
             'post': post,
             'comments': post.comments.order_by('-date'),
+            'is_saved': self.is_post_stored(request, post.id),
             }
         return render(request, 'blog/post-details.html', context)
 
@@ -50,6 +61,39 @@ class BlogDetailPageView(View):
             'form': form,
             'post': post,
             'comments': post.comments.order_by('-date'),
+            'is_saved': self.is_post_stored(request, post.id),
         }
         return render(request, 'blog/post-details.html', context)
+
+
+class ReadLaterView(View):
+    def get(self, request):
+        stored_post = request.session.get('stored_post')
+        context = {}
+
+        if stored_post is None:
+            context['posts'] = []
+            context['has_posts'] = False
+        else:
+            post = Post.objects.filter(id__in=stored_post)
+            context['has_posts'] = True
+            context['posts'] = post
+
+        return render(request, 'blog/stored-posts.html', context)
+
+    def post(self, request):
+        stored_post = request.session.get('stored_post')
+
+        if stored_post is None:
+            stored_post = []
+
+        post_id = int(request.POST.get('post_id'))
+
+        if post_id not in stored_post:
+            stored_post.append(post_id)
+        else:
+            stored_post.remove(post_id)
+        request.session['stored_post'] = stored_post
+
+        return redirect('blog_page')
 

@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, TemplateView, DetailView
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
+from django.views import View
 
-from my_site.blog.models import Post, Author
+from my_site.blog.forms import CommentsForm
+from my_site.blog.models import Post
 
 
 class IndexView(ListView):
@@ -23,13 +25,31 @@ class BlogPageView(ListView):
     ordering = ['-date']
 
 
-class BlogDetailPageView(DetailView):
-    model = Post
-    template_name = 'blog/post-details.html'
+class BlogDetailPageView(View):
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        form = CommentsForm()
+        context = {
+            'form': form,
+            'post': post,
+            'comments': post.comments.order_by('-date'),
+            }
+        return render(request, 'blog/post-details.html', context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = self.object.tags.all()
-        return context
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('blog_detail_page', slug=slug)
 
+        form = CommentsForm(request.POST)
+        context = {
+            'form': form,
+            'post': post,
+            'comments': post.comments.order_by('-date'),
+        }
+        return render(request, 'blog/post-details.html', context)
 

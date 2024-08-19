@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Author, Post, Tag
+from .models import Author, Post, Tag, Comment
 
 
 @admin.register(Author)
@@ -18,3 +18,8 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('caption',)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'text', 'date')

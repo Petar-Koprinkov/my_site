@@ -64,3 +64,24 @@ class Tag(models.Model):
         to=Post,
         related_name='tags'
     )
+
+
+class Comment(models.Model):
+    username = models.CharField(
+        max_length=50
+    )
+
+    email = models.EmailField()
+
+    text = models.TextField(max_length=500)
+
+    post = models.ForeignKey(
+        to=Post,
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
+
+    date = models.DateTimeField(
+        auto_now_add=True,
+        null=True,
+    )

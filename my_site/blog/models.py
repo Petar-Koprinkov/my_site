@@ -24,8 +24,9 @@ class Post(models.Model):
     )
     excerpt = models.TextField()
 
-    image_name = models.CharField(
-        max_length=50
+    image = models.ImageField(
+        upload_to='images',
+        null=True,
     )
 
     date = models.DateTimeField(

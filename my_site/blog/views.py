@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 
 from my_site.blog.models import Post, Author
 
 
 def index(request):
     posts = Post.objects.select_related("author").order_by("-date")[:3]
-    author = Author.objects.get(last_name='Koprinkov')
     context = {
         "posts": posts,
-        "author": author,
     }
 
     return render(request, 'blog/index.html', context)

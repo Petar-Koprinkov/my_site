@@ -7,7 +7,7 @@
                     {{ post.title }}
                 </h3>
                 <p>
-                    {{ post.excerpt }}
+                    {{ post.excerpt|slice:153|add:'...' }}
                 </p>
             </div>
         </a>

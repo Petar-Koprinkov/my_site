@@ -30,7 +30,7 @@ class Post(models.Model):
     )
 
     date = models.DateTimeField(
-        auto_now_add=True
+        auto_now=True
     )
 
     slug = models.SlugField(

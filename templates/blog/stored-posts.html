@@ -9,8 +9,8 @@
 
 {% block content %}
     <section id="stored-posts">
-    {% if not has_posts %}
-        <h2>You did not store any post for later!</h2>
+    {% if not posts %}
+        <h2>You didn't store any post for later</h2>
     {% else %}
         <h2>Your stored posts:</h2>
         <ul>

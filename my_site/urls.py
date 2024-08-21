@@ -17,10 +17,11 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-
+from django.views.generic.base import RedirectView
 from my_site import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('my_site.blog.urls'))
+    path('petar-blog/', include('my_site.blog.urls')),
+    path('', RedirectView.as_view(url='petar-blog/')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

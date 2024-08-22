@@ -84,7 +84,7 @@ class ReadLaterView(View):
     def post(self, request):
         stored_post = request.session.get('stored_post')
 
-        if stored_post is None:
+        if stored_post is None or len(stored_post) == 0:
             stored_post = []
 
         post_id = int(request.POST.get('post_id'))

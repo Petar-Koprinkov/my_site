@@ -13,6 +13,12 @@
 {% block content %}
     <section id="all-posts">
         <h2>My Collected Posts</h2>
+        <form action="{% url 'blog_page' %}" method="GET">
+            <div>
+                {{ form }}
+                <button type="submit">Sumbit</button>
+            </div>
+        </form>
         <ul>
             {% for post in posts %}
                 {% include 'blog/includes/post.html' %}

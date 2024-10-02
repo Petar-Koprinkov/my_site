@@ -13,4 +13,11 @@ class CommentsForm(forms.ModelForm):
             'text': 'Your Comment',
         }
 
-        
+
+class SearchForm(forms.Form):
+    title = forms.CharField(
+        max_length=30,
+        label='',
+        widget=forms.TextInput(attrs={'placeholder': 'Search for post...'}),
+        required=False,
+    )

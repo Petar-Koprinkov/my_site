@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
 from django.views import View
 
-from my_site.blog.forms import CommentsForm
+from my_site.blog.forms import CommentsForm, SearchForm
 from my_site.blog.models import Post
 
 
@@ -18,11 +18,27 @@ class IndexView(ListView):
         return data
 
 
-class BlogPageView(ListView):
-    model = Post
-    template_name = 'blog/all-post.html'
-    context_object_name = 'posts'
-    ordering = ['-date']
+# class BlogPageView(ListView):
+#     model = Post
+#     template_name = 'blog/all-post.html'
+#     context_object_name = 'posts'
+#     ordering = ['-date']
+
+
+class BlogPageView(View):
+    def get(self, request):
+        form = SearchForm(request.GET)
+        posts = Post.objects.all().order_by('-date')
+
+        if form.is_valid():
+            posts = posts.filter(title__icontains=form.cleaned_data['title'])
+
+        context = {
+            'form': form,
+            'posts': posts
+        }
+
+        return render(request, 'blog/all-post.html', context)
 
 
 class BlogDetailPageView(View):

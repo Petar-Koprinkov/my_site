@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% load static %}
+{% load markdown_filter %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
@@ -51,7 +52,7 @@
     </section>
 
     <main>
-        {{ post.content|linebreaks }}
+        {{ post.content|markdown }}
     </main>
     
     <section id="comments">

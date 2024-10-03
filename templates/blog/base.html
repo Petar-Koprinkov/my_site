@@ -1,4 +1,5 @@
 {% load static %}
+{% load current_time %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +15,7 @@
         <nav>
             <a href="{% url 'read_later' %}">Stored Post</a>
             <a href="{% url 'blog_page' %}">All Post</a>
+            <a>{% current_time %}</a>
         </nav>
     </header>
     {% block content %}

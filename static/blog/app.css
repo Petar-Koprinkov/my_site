@@ -38,6 +38,12 @@ h3 {
   margin-left: 2rem;
 }
 
+
+#main-navigation .current-time:hover {
+  color: white;
+  justify-content: end;
+}
+
 #main-navigation a:hover,
 #main-navigation a:active {
   color: #cf79f1;

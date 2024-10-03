@@ -15,8 +15,9 @@
         <nav>
             <a href="{% url 'read_later' %}">Stored Post</a>
             <a href="{% url 'blog_page' %}">All Post</a>
-            <a>{% current_time %}</a>
+            <a></a>
         </nav>
+        <a class="current-time">{% current_time %}</a>
     </header>
     {% block content %}
     {% endblock %}
